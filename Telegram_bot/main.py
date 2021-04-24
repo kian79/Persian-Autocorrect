@@ -1,6 +1,10 @@
 import requests
 import yaml
-import persian
+# import ipynb.fs.full.persian_autocorrect
+import sys
+# insert at 1, 0 is the script path (or '' in REPL)
+sys.path.insert(1, '/Notebook')
+
 
 
 def get_token(file_path='token.yml'):
@@ -8,9 +12,10 @@ def get_token(file_path='token.yml'):
     bot_token = yaml.safe_load(bot_token_file)
     return bot_token['token']
 
-class BotHandler():
 
-    def __init__(self,token):
+class BotHandler:
+
+    def __init__(self, token):
         self.token = token
         self.api_url = f"https://api.telegram.org/bot{token}/"
 
@@ -35,10 +40,12 @@ class BotHandler():
             last_update = None
         return last_update
 
+
 if __name__ == '__main__':
     my_bot = BotHandler(get_token())
     offset = None
     while True:
+        print(1)
         my_bot.get_updates(offset=offset)
         last_update = my_bot.get_last_update()
         last_update_id = last_update['update_id']
@@ -46,13 +53,12 @@ if __name__ == '__main__':
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name'].lower()
         last_chat_username = last_update['message']['chat']['username'].lower()
-        print(f"last id : {last_update_id} , last text : {last_chat_text} , last chat id : {last_chat_id} , last name : {last_chat_name}")
+        print(
+            f"last id : {last_update_id} , last text : {last_chat_text} , last chat id : {last_chat_id} , last name : {last_chat_name}")
         if last_chat_username == 'golnoosh6191':
-            my_bot.send_message(last_chat_id,"سلام پریا")
+            my_bot.send_message(last_chat_id, "سلام پریا")
             print(f"sent to {last_chat_name}")
         if last_chat_username == 'pariya_md':
-            my_bot.send_message(last_chat_id,"سلام پریا")
+            my_bot.send_message(last_chat_id, "سلام پریا")
             print(f"sent to {last_chat_name}")
-        offset = last_update_id+1
-
-
+        offset = last_update_id + 1
