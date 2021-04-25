@@ -1,11 +1,5 @@
 import requests
 import yaml
-# import ipynb.fs.full.persian_autocorrect
-import sys
-# insert at 1, 0 is the script path (or '' in REPL)
-sys.path.insert(1, '/Notebook')
-
-
 
 def get_token(file_path='token.yml'):
     bot_token_file = open(file_path)
